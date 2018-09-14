@@ -1,0 +1,41 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>MapChart Encoder</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="from-iso3-table.css" rel="stylesheet">
+    <script type="text/javascript" src="from-iso3-table.js"></script>
+</head>
+<body>
+<div class="wrapper">
+    <div class="side left">
+        <div class="content">
+            <h1>MapChart Encoder For Xavier</h1>
+            <span class="info">
+                <p>Copy raw data from kibana</p>
+            </span>
+            <textarea id="input_textarea" name="input" placeholder="Country,Count,LOCs
+USA,2,10000000
+GBR,1,1000000" spellcheck="false"></textarea>
+            <br>
+            <button type="button" onclick="convert()">MapChart Json</button>
+            <label data-simple-state="status">Decodes kibana table into MapChart json format.</label>
+            <br><br>
+            <textarea id="output_textarea" name="output" placeholder="Result goes here..." data-simple-state="result"></textarea>
+            <br>
+            <span class="info">
+                <ul>
+                  <li>Copy the above json data</li>
+                  <li>Open <a href="https://mapchart.net/detworld.html">mapchart.net/detworld.html</a></li>
+                  <li>Scroll down and in the right column click on "SAVE - UPLOAD"</li>
+                  <li>Paste copied json and click "SUBMIT"</li>
+                  <li>Click "PREVIEW MAP"</li>
+                  <li>Click "DOWNLOAD MAP"</li>
+                </ul>
+            </span>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

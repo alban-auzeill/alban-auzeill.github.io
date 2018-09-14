@@ -1,0 +1,378 @@
+.fa-ul > li {
+    position: relative;
+}
+
+body {
+    color: rgba(0, 0, 0, 1);
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    font-style: normal;
+    text-align: center;
+    font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+    font-weight: normal;
+    line-height: normal;
+    background-color: rgba(240, 240, 240, 1);
+}
+
+html * {
+    max-height: 999999px;
+}
+
+a, ul, li, input, button, select, textarea {
+    resize: none;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+textarea {
+    overflow: auto;
+}
+
+textarea::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, .5);
+}
+
+div.clear {
+    clear: both;
+    margin: 0;
+    padding: 0;
+    display: block;
+    position: relative;
+}
+
+div.wrapper {
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+    padding: 12px;
+    display: block;
+    position: relative;
+    min-width: 480px;
+    max-width: 1000px;
+    box-sizing: border-box;
+    background-size: auto;
+    background-color: rgba(200, 200, 200, 1);
+}
+
+div.header div.sisters a {
+    color: rgba(255, 255, 255, 1);
+    width: auto;
+    height: 26px;
+    margin: 0;
+    padding: 0 12px;
+    display: block;
+    position: relative;
+    font-size: 16px;
+    text-align: left;
+    box-sizing: border-box;
+    font-weight: bold;
+    line-height: 26px;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+div.header div.sisters a:last-of-type {
+    margin-top: 8px;
+}
+
+div.header div.sisters a:hover, div.header div.sisters a:focus {
+    color: rgba(96, 96, 96, 1);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(192, 192, 192, 1) 100%);
+}
+
+div.header div.sisters a i {
+    float: right;
+    width: 18px;
+    height: 26px;
+    margin: 0;
+    padding: 0;
+    display: block;
+    position: relative;
+    font-size: 16px;
+    text-align: center;
+    line-height: 26px;
+}
+
+div.side {
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    display: block;
+    position: relative;
+}
+
+div.side.left {
+    overflow: hidden;
+}
+
+div.content {
+    color: rgba(0, 0, 0, 1);
+    width: auto;
+    height: auto;
+    margin: 0 0 12px 0;
+    padding: 8px;
+    display: block;
+    position: relative;
+    font-size: 13px;
+    box-sizing: border-box;
+    text-align: justify;
+    font-weight: normal;
+    line-height: 17px;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+div.content h1 {
+    color: rgba(0, 0, 0, 1);
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    display: block;
+    position: relative;
+    font-size: 18px;
+    text-align: left;
+    font-weight: bold;
+    line-height: normal;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+div.content h2 {
+    color: rgba(0, 0, 0, 1);
+    width: auto;
+    height: auto;
+    margin: 0 0 8px 0;
+    padding: 0 0 8px 0;
+    display: block;
+    position: relative;
+    font-size: 15px;
+    text-align: left;
+    font-weight: bold;
+    line-height: normal;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px dashed rgba(204, 204, 204, 1);
+}
+
+div.content h2 i {
+    margin-right: 6px;
+}
+
+div.content h3 {
+    color: rgba(0, 0, 0, 1);
+    width: auto;
+    height: auto;
+    margin: 12px 0 0 0;
+    padding: 0;
+    display: block;
+    position: relative;
+    font-size: 14px;
+    text-align: left;
+    font-weight: bold;
+    line-height: normal;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+div.content span.info {
+    color: rgba(96, 96, 96, 1);
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 4px 0 8px 0;
+    display: block;
+    position: relative;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: normal;
+    border-bottom: 1px dashed rgba(204, 204, 204, 1);
+}
+
+div.content a {
+    color: rgba(67, 154, 0, 1);
+    text-decoration: none;
+}
+
+div.content a:hover, div.content a:focus {
+    text-decoration: underline;
+}
+
+div.content a.tool i {
+    float: right;
+    width: 18px;
+    height: 26px;
+    margin: 0;
+    padding: 0;
+    display: block;
+    position: relative;
+    font-size: 14px;
+    text-align: center;
+    line-height: 26px;
+}
+
+div.content ul, div.content ol {
+    margin: 8px 16px;
+    padding: 8px;
+}
+
+div.content textarea[name="input"], div.content textarea[name="output"] {
+    width: 100%;
+    height: 212px;
+    border: 1px solid rgba(204, 204, 204, 1);
+    margin: 8px 0 0 0;
+    padding: 4px;
+    display: block;
+    position: relative;
+    overflow: auto;
+    font-size: 13px;
+    text-align: left;
+    box-sizing: border-box;
+    font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+    font-weight: normal;
+    line-height: normal;
+    background-color: rgba(238, 238, 238, 1);
+}
+
+div.content textarea[name="output"] {
+    margin: 0;
+}
+
+div.content span.notice i[class] {
+    margin-right: 6px;
+}
+
+div.content input[type="number"], div.content select {
+    color: rgba(0, 0, 0, 1);
+    width: 136px;
+    height: 26px;
+    border: 1px solid rgba(204, 204, 204, 1);
+    margin: 8px 8px 0 0;
+    padding: 0 8px;
+    display: inline-block;
+    position: relative;
+    font-size: 13px;
+    text-align: left;
+    box-sizing: border-box;
+    line-height: normal;
+    background-color: rgba(238, 238, 238, 1);
+}
+
+div.content select {
+    cursor: pointer;
+    padding: 0 4px;
+}
+
+div.content select[disabled] {
+    color: rgba(204, 204, 204, 1);
+    cursor: not-allowed;
+}
+
+div.content input[type="radio"], div.content input[type="checkbox"] {
+    width: auto;
+    height: auto;
+    cursor: pointer;
+    margin: 10px 8px 0 0;
+    padding: 0;
+    display: inline;
+    position: relative;
+    line-height: 18px;
+    vertical-align: -2px;
+}
+
+div.content label {
+    color: rgba(0, 0, 0, 1);
+    width: auto;
+    height: auto;
+    margin: 8px 0 0 0;
+    padding: 0;
+    display: inline;
+    position: relative;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+div.content label i[class] {
+    margin-right: 6px;
+}
+
+div.content div.live i {
+    font-size: 15px;
+    line-height: 24px;
+    margin-right: 8px;
+}
+
+div.content button[type="button"], div.content button[type="submit"] {
+    color: rgba(255, 255, 255, 1);
+    width: 136px;
+    height: 26px;
+    cursor: pointer;
+    border: 1px solid rgba(67, 154, 0, 1);
+    margin: 8px 8px 0 0;
+    padding: 0;
+    display: inline-block;
+    position: relative;
+    font-size: 14px;
+    text-align: center;
+    box-sizing: border-box;
+    font-weight: bold;
+    line-height: normal;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
+    background-color: rgba(100, 100, 269, 1);
+}
+
+div.content button[type="button"][disabled], div.content button[type="submit"][disabled] {
+    color: rgba(204, 204, 204, 1);
+    cursor: not-allowed;
+    border: 1px solid rgba(204, 204, 204, 1);
+    background-color: rgba(238, 238, 238, 1);
+}
+
+div.content button[type="button"] i:first-of-type, div.content button[type="submit"] i:first-of-type {
+    margin-right: 6px;
+}
+
+div.content button[type="button"] i:last-of-type, div.content button[type="submit"] i:last-of-type {
+    margin-left: 6px;
+}
+
+div.content div.state i[class] {
+    margin-right: 6px;
+}
+
+div.content div.state a {
+    font-weight: bold;
+}
+
+div.content div.state hr {
+    width: 100%;
+    height: 0;
+    border: none;
+    margin: 4px 0 8px 0;
+    padding: 0;
+    border-top: 1px dashed rgba(204, 204, 204, 1);
+}
+
+div.content div.state textarea {
+    color: rgba(0, 0, 0, 1);
+    width: 100%;
+    height: 212px;
+    border: none;
+    margin: 0;
+    padding: 0 4px 0 0;
+    display: block;
+    position: relative;
+    overflow: auto;
+    font-size: 13px;
+    text-align: left;
+    box-sizing: border-box;
+    font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+    font-weight: normal;
+    line-height: normal;
+    background-color: rgba(238, 238, 238, 1);
+}
