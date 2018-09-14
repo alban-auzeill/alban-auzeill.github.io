@@ -537,10 +537,12 @@ function convert() {
 
   for (let i = 0; i < groups.length; i++) {
     let group = groups[i];
-    let groupColor = group["color"];
-    delete group["color"];
-    delete group["minLoc"];
-    groupMap[groupColor] = group;
+    if (group["paths"].length > 0) {
+      let groupColor = group["color"];
+      delete group["color"];
+      delete group["minLoc"];
+      groupMap[groupColor] = group;
+    }
   }
 
   let json = {
