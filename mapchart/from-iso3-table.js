@@ -187,7 +187,7 @@ let countryByIsoCode = {
   "SHN": "St_Helena",
   "KNA": "St_Kitts_and_Nevis",
   "LCA": "St_Lucia",
-  //"MAF": "Saint-Martin_(French_part)",
+  "SXM": "Saint-Martin_(French_part)",
   "SPM": "St_Pierre_et_Miquelon",
   "VCT": "St_Vincent_and_the_Grenadines",
   "WSM": "Samoa",
@@ -249,6 +249,68 @@ let countryByIsoCode = {
 };
 
 // Extracted from https://mapchart.net/js/detworldLoader.js?v=2.6 looking for ...attr({id:"Afghanistan"...
+function convert() {
+
+  let groups = [
+    {"minLoc": 10000000, "color": "#7f0000", "div": "#box0", "label": ">= 10'000 kLOC", "paths": []},
+    {"minLoc": 1000000, "color": "#b30000", "div": "#box1", "label": ">= 1'000 kLOC", "paths": []},
+    {"minLoc": 100000, "color": "#d7301f", "div": "#box2", "label": ">= 100 kLOC", "paths": []},
+    {"minLoc": 10000, "color": "#ef6548", "div": "#box3", "label": ">= 10 kLOC", "paths": []},
+    {"minLoc": 1000, "color": "#fc8d59", "div": "#box4", "label": ">= 1 kLOC", "paths": []},
+    {"minLoc": 0, "color": "#fdbb84", "div": "#box5", "label": ">= 0 LOC", "paths": []}
+  ];
+
+  let errors = [];
+
+  for (let isoCode in countryByIsoCode) {
+    let country = countryByIsoCode[isoCode];
+    if (mapChartValidCountryName.indexOf(country) < 0) {
+      errors.push("ERROR, for the isoCode: " + isoCode + " the country name is not a valid mapchart one: " + country);
+    }
+  }
+  let rows = document.getElementById("input_textarea").value.split(/[\r\n]+/);
+
+  for (let lineIndex = 0; lineIndex < rows.length; lineIndex++) {
+    let line = rows[lineIndex].trim();
+    if (line.length > 0 && !line.startsWith("Country")) {
+      let cols = line.split(",");
+      let isoCode = cols[0];
+      let lineOfCode = parseInt(cols[2]);
+      let country = countryByIsoCode[isoCode];
+      if (mapChartValidCountryName.indexOf(country) < 0) {
+        errors.push("ERROR, no mapchart country mapping exists for iso code " + isoCode);
+      }
+      for (let i = 0; i < groups.length; i++) {
+        let group = groups[i];
+        if (lineOfCode >= group["minLoc"]) {
+          group["paths"].push(country);
+          break;
+        }
+      }
+    }
+  }
+  let groupMap = {};
+
+  for (let i = 0; i < groups.length; i++) {
+
+    let group = groups[i];
+    if (group["paths"].length > 0) {
+      let groupColor = group["color"];
+      delete group["color"];
+      delete group["minLoc"];
+      groupMap[groupColor] = group;
+    }
+  }
+  let json = {
+    "groups": groupMap,
+    "title": "SonarCloud Clients",
+    "hidden": [],
+    "borders": "#000000"
+  };
+
+  document.getElementById("output_textarea").value = errors.join("\n") + JSON.stringify(json, null, 2);
+
+}
 // valid for https://mapchart.net/detworld.html
 let mapChartValidCountryName = [
   "Afghanistan",
@@ -431,6 +493,7 @@ let mapChartValidCountryName = [
   "Romania",
   "Russia",
   "Rwanda",
+  "Saint-Martin_(French_part)",
   "Samoa",
   "San_Marino",
   "Sao_Tome_and_Principe",
@@ -492,65 +555,3 @@ let mapChartValidCountryName = [
   "Zambia",
   "Zimbabwe",
 ];
-
-function convert() {
-
-  let groups = [
-    {"minLoc": 10000000, "color": "#7f0000", "div": "#box0", "label": ">= 10'000 kLOC", "paths": []},
-    {"minLoc": 1000000, "color": "#b30000", "div": "#box1", "label": ">= 1'000 kLOC", "paths": []},
-    {"minLoc": 100000, "color": "#d7301f", "div": "#box2", "label": ">= 100 kLOC", "paths": []},
-    {"minLoc": 10000, "color": "#ef6548", "div": "#box3", "label": ">= 10 kLOC", "paths": []},
-    {"minLoc": 1000, "color": "#fc8d59", "div": "#box4", "label": ">= 1 kLOC", "paths": []},
-    {"minLoc": 0, "color": "#fdbb84", "div": "#box5", "label": ">= 0 LOC", "paths": []}
-  ];
-
-  let errors = [];
-  for (let isoCode in countryByIsoCode) {
-    let country = countryByIsoCode[isoCode];
-    if (mapChartValidCountryName.indexOf(country) < 0) {
-      errors.push("ERROR, for the isoCode: " + isoCode + " the country name is not a valid mapchart one: " + country);
-    }
-  }
-
-  let rows = document.getElementById("input_textarea").value.split(/[\r\n]+/);
-  for (let lineIndex = 0; lineIndex < rows.length; lineIndex++) {
-    let line = rows[lineIndex].trim();
-    if (line.length > 0 && !line.startsWith("Country")) {
-      let cols = line.split(",");
-      let isoCode = cols[0];
-      let lineOfCode = parseInt(cols[2]);
-      let country = countryByIsoCode[isoCode];
-      if (mapChartValidCountryName.indexOf(country) < 0) {
-        errors.push("ERROR, no mapchart country mapping exists for iso code " + isoCode);
-      }
-      for (let i = 0; i < groups.length; i++) {
-        let group = groups[i];
-        if (lineOfCode >= group["minLoc"]) {
-          group["paths"].push(country);
-          break;
-        }
-      }
-    }
-  }
-
-  let groupMap = {};
-
-  for (let i = 0; i < groups.length; i++) {
-    let group = groups[i];
-    if (group["paths"].length > 0) {
-      let groupColor = group["color"];
-      delete group["color"];
-      delete group["minLoc"];
-      groupMap[groupColor] = group;
-    }
-  }
-
-  let json = {
-    "groups": groupMap,
-    "title": "SonarCloud Clients",
-    "hidden": [],
-    "borders": "#000000"
-  };
-
-  document.getElementById("output_textarea").value = errors.join("\n") + JSON.stringify(json, null, 2);
-}
