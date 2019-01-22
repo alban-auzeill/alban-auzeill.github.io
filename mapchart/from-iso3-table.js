@@ -183,11 +183,11 @@ let countryByIsoCode = {
   "ROU": "Romania",
   "RUS": "Russia",
   "RWA": "Rwanda",
-  //"BLM": "Saint-Barthélemy",
+  "BLM": "Anguilla",
   "SHN": "St_Helena",
   "KNA": "St_Kitts_and_Nevis",
   "LCA": "St_Lucia",
-  "SXM": "Saint-Martin_(French_part)",
+  "SXM": "Anguilla",
   "SPM": "St_Pierre_et_Miquelon",
   "VCT": "St_Vincent_and_the_Grenadines",
   "WSM": "Samoa",
@@ -270,6 +270,7 @@ function convert() {
   }
   let rows = document.getElementById("input_textarea").value.split(/[\r\n]+/);
 
+  let aggregatedCountry = {};
   for (let lineIndex = 0; lineIndex < rows.length; lineIndex++) {
     let line = rows[lineIndex].trim();
     if (line.length > 0 && !line.startsWith("Country")) {
@@ -279,16 +280,25 @@ function convert() {
       let country = countryByIsoCode[isoCode];
       if (mapChartValidCountryName.indexOf(country) < 0) {
         errors.push("ERROR, no mapchart country mapping exists for iso code " + isoCode);
-      }
-      for (let i = 0; i < groups.length; i++) {
-        let group = groups[i];
-        if (lineOfCode >= group["minLoc"]) {
-          group["paths"].push(country);
-          break;
-        }
+      } else if (aggregatedCountry[country]) {
+        aggregatedCountry[country] += lineOfCode;
+      } else {
+        aggregatedCountry[country] = lineOfCode;
       }
     }
   }
+
+  for (let country in aggregatedCountry) {
+    let lineOfCode = aggregatedCountry[country];
+    for (let i = 0; i < groups.length; i++) {
+      let group = groups[i];
+      if (lineOfCode >= group["minLoc"]) {
+        group["paths"].push(country);
+        break;
+      }
+    }
+  }
+
   let groupMap = {};
 
   for (let i = 0; i < groups.length; i++) {
@@ -312,6 +322,7 @@ function convert() {
 
 }
 // valid for https://mapchart.net/detworld.html
+// curl -vs https://mapchart.net/js/detworldLoader.js?v=2.6 2>&1 | sed -n 's/.*data("id",\("[^"]*"\)).*/  \1,/p' | sort
 let mapChartValidCountryName = [
   "Afghanistan",
   "Albania",
@@ -472,8 +483,8 @@ let mapChartValidCountryName = [
   "Niger",
   "Nigeria",
   "Niue",
-  "North_Korea",
   "Northern_Mariana_Islands",
+  "North_Korea",
   "Norway",
   "Oman",
   "Pakistan",
@@ -493,7 +504,6 @@ let mapChartValidCountryName = [
   "Romania",
   "Russia",
   "Rwanda",
-  "Saint-Martin_(French_part)",
   "Samoa",
   "San_Marino",
   "Sao_Tome_and_Principe",
